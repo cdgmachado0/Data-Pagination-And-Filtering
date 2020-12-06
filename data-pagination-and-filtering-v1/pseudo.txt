@@ -1,0 +1,6 @@
+depending on the selected page, display the proper students (42 students in total)
+    if 1 is passed, display from student 0 to 8 (page 1)
+    if 2 is passed, from 9 to 18 (page 2)
+    if 3 is passed, from 19 to 28 (page 3)
+    if 4 is passed, from 29 to 38 (page 4)
+    if 5 is passed, from 39 to 42 (page 5)
