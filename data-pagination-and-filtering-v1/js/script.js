@@ -77,3 +77,7 @@ ulButtons.addEventListener('click', (e) => {
       showPage(data, newPage);
    }
 });
+
+const header = document.querySelector('.header');
+const searchLabel = document.createElement('label');
+searchLabel
