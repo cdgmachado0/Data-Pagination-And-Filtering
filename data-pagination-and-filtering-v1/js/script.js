@@ -2,6 +2,7 @@
 Treehouse Techdegree:
 FSJS Project 2 - Data Pagination and Filtering
 */
+const header = document.querySelector('.header');
 const ulList = document.querySelector('.student-list');
 const ulButtons = document.querySelector('.link-list');
 
@@ -78,6 +79,35 @@ ulButtons.addEventListener('click', (e) => {
    }
 });
 
-const header = document.querySelector('.header');
+
 const searchLabel = document.createElement('label');
-searchLabel
+searchLabel.className = 'student-search';
+const searchInput = document.createElement('input');
+searchInput.id = 'search';
+searchInput.placeholder = 'Search by name...';
+const searchButton = document.createElement('button');
+searchButton.innerHTML = `<img src="img/icn-search.svg" alt="Search icon">`;
+searchLabel.append(searchInput, searchButton);
+header.appendChild(searchLabel);
+
+searchInput.addEventListener('keyup', (e) => {
+   let toSearch = e.target.value.toLowerCase();
+   const newStudentsArr = [];
+
+   for (let i = 0; i < data.length; i++) {
+      let firstNameReference = data[i].name.first.toLowerCase();
+      let lastNameReference = data[i].name.last.toLowerCase();
+      if (firstNameReference.includes(toSearch) || lastNameReference.includes(toSearch)) {
+         newStudentsArr.push(data[i]);
+      }
+   }
+   ulButtons.innerHTML = '';
+   if (newStudentsArr.length === 0) {
+      ulList.innerHTML = `
+         <li><h3>No results where found under that search.</h3></li>
+      `;
+   } else {
+      showPage(newStudentsArr, 1);
+      addPagination(newStudentsArr);
+   }
+});
