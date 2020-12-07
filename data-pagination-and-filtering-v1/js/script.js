@@ -1,11 +1,12 @@
-/*
-Treehouse Techdegree:
-FSJS Project 2 - Data Pagination and Filtering
-*/
+
 const header = document.querySelector('.header');
 const ulList = document.querySelector('.student-list');
 const ulButtons = document.querySelector('.link-list');
 
+/**
+ * Creates pagination buttons
+ * @param {number} i increasing variable on a for..loop 
+ */
 function createButtons(i) {
    let li = document.createElement('li');
    let button = document.createElement('button');
@@ -14,10 +15,11 @@ function createButtons(i) {
    ulButtons.appendChild(li); 
 }
 
-/*
-Create the `showPage` function
-This function will create and insert/append the elements needed to display a "page" of nine students
-*/
+/**
+ * Shows students' details
+ * @param {array} _list list of student objects      
+ * @param {number} _page clicked (or default) page that will display students according to their index
+ */
 function showPage(_list, _page) {
    let startIndex = (_page * 9) - 9;
    let endIndex = _page * 9;
@@ -40,15 +42,14 @@ function showPage(_list, _page) {
          `;
       }
    }
-   
    ulList.innerHTML = studentList;
 }
 
 
-/*
-Create the `addPagination` function
-This function will create and insert/append the elements needed for the pagination buttons
-*/
+/**
+ * Creates pagination buttons according to length of list of students
+ * @param {array} _list list of student objects
+ */
 function addPagination(_list) {
    let numberOfButtons = Math.floor(_list.length / 9);
    let mod = (_list.length / 9) % (numberOfButtons);
@@ -61,10 +62,11 @@ function addPagination(_list) {
 }
 
 
-// Call functions
+// Call initial functions
 showPage(data, 1);
 addPagination(data);
 
+// Listens for the pagination button that was clicked and display students accordingly
 ulButtons.addEventListener('click', (e) => {
    let clickedButton = e.target;
    if (clickedButton.tagName === 'BUTTON') {
@@ -80,6 +82,7 @@ ulButtons.addEventListener('click', (e) => {
 });
 
 
+// Dynamically creates Search bar
 const searchLabel = document.createElement('label');
 searchLabel.className = 'student-search';
 const searchInput = document.createElement('input');
@@ -90,6 +93,8 @@ searchButton.innerHTML = `<img src="img/icn-search.svg" alt="Search icon">`;
 searchLabel.append(searchInput, searchButton);
 header.appendChild(searchLabel);
 
+
+// Displays students according to search results derived from user's input. 
 searchInput.addEventListener('keyup', (e) => {
    let toSearch = e.target.value.toLowerCase();
    const newStudentsArr = [];
